@@ -199,23 +199,31 @@
     }
 
     .main-title {
-      font-family: 'Noto Serif SC', "Songti SC", serif;
-      font-size: clamp(32px, 4.2vw, 54px);
+      font-family: 'Noto Serif SC', "Songti SC", Georgia, serif;
+      font-size: clamp(26px, 3.8vw, 48px);
       font-weight: 900;
-      line-height: 1.25;
+      line-height: 1.35;
       color: #4a0018;
       margin-bottom: 16px;
       text-shadow: 0 2px 15px rgba(255, 117, 140, 0.25);
     }
 
-    .main-title span {
+    .main-title .title-top {
+      display: block;
+      white-space: nowrap;
+      word-break: keep-all;
+      letter-spacing: 0.5px;
+    }
+
+    .main-title .title-bottom {
+      display: inline-block;
       background: linear-gradient(135deg, #ff1461, #ff758c 60%, #c9184a);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       position: relative;
     }
 
-    .main-title span::after {
+    .main-title .title-bottom::after {
       content: " ❤️";
       -webkit-text-fill-color: initial;
     }
@@ -1076,11 +1084,11 @@
       color: var(--primary);
     }
 
-    /* 响应式适配 */
+    /* 响应式移动端深度适配与惊艳调优 */
     @media (max-width: 960px) {
       .hero-section {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 28px;
       }
       .prize-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1090,64 +1098,188 @@
       }
     }
 
-    @media (max-width: 560px) {
+    @media (max-width: 600px) {
       .app-container {
-        padding: 12px 14px 40px;
+        padding: 10px 12px calc(30px + env(safe-area-inset-bottom));
       }
       header.header {
-        padding: 10px 14px;
-        margin-bottom: 16px;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+        border-radius: 24px;
+      }
+      .brand {
+        gap: 8px;
+      }
+      .brand-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
       }
       .brand-text h1 {
-        font-size: 15px;
+        font-size: 13px;
+        letter-spacing: 0;
+        white-space: nowrap;
+      }
+      .brand-text p {
+        font-size: 9px;
+        letter-spacing: 0.5px;
+      }
+      .header-actions {
+        gap: 6px;
+      }
+      .btn-pill {
+        padding: 6px 10px;
+        font-size: 11px;
+        border-radius: 16px;
+      }
+      .hero-info {
+        padding: 4px 2px;
+        text-align: center;
+      }
+      .badge-tag {
+        margin-bottom: 12px;
+        font-size: 11px;
+        padding: 5px 12px;
       }
       .main-title {
-        font-size: 30px;
+        font-size: clamp(22px, 6.2vw, 29px);
+        margin-bottom: 14px;
+        line-height: 1.35;
+      }
+      .main-title .title-top {
+        display: block;
+        white-space: nowrap;
+        word-break: keep-all;
+      }
+      .main-title .title-bottom {
+        font-size: 1.08em;
+      }
+      .sub-lead {
+        font-size: 13px;
+        line-height: 1.7;
+        margin: 0 auto 18px;
+        text-align: left;
       }
       .stats-card {
-        padding: 12px;
+        padding: 12px 8px;
         gap: 6px;
+        margin-bottom: 18px;
       }
       .stat-item .stat-num {
         font-size: 17px;
       }
+      .stat-item .stat-label {
+        font-size: 10px;
+      }
+      .notice-box {
+        font-size: 12px;
+        padding: 12px 14px;
+        text-align: left;
+      }
       .wheel-stage {
-        padding: 16px 12px;
-        border-radius: 28px;
+        padding: 16px 10px 14px;
+        border-radius: 26px;
+        box-shadow: 0 12px 40px rgba(255, 77, 109, 0.22);
+      }
+      .wheel-container {
+        width: min(88vw, 360px);
+        margin: 6px 0;
+      }
+      .wheel-outer-ring {
+        inset: -10px;
+      }
+      .wheel-pointer {
+        width: 40px;
+        height: 54px;
+        top: -10px;
+      }
+      .pointer-arrow {
+        border-left-width: 14px;
+        border-right-width: 14px;
+        border-top-width: 28px;
+      }
+      .pointer-heart {
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
       }
       .wheel-center-btn {
-        width: 86px;
-        height: 86px;
+        width: 82px;
+        height: 82px;
+        border-width: 4px;
+      }
+      .wheel-center-btn span.heart-icon {
+        font-size: 18px;
       }
       .wheel-center-btn span.btn-text {
-        font-size: 14px;
+        font-size: 13px;
+      }
+      .wheel-center-btn span.btn-sub {
+        font-size: 8px;
       }
       .prizes-section {
-        padding: 20px 16px;
+        padding: 18px 12px;
         border-radius: 24px;
       }
+      .section-header h2 {
+        font-size: 20px;
+      }
       .prize-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .prize-card {
+        padding: 14px 10px;
+        border-radius: 16px;
+      }
+      .prize-title {
+        font-size: 13px;
+      }
+      .prize-desc {
+        font-size: 11px;
+        line-height: 1.5;
       }
       .panel-box {
-        padding: 18px 14px;
+        padding: 16px 12px;
+        border-radius: 22px;
+      }
+      .panel-header h3 {
+        font-size: 16px;
+      }
+      .certificate-card {
+        padding: 20px 14px;
+        border-radius: 22px;
+        width: 95vw;
+        max-height: 88vh;
       }
       .cert-inner-border {
-        padding: 18px 12px;
+        padding: 16px 10px;
+        border-radius: 14px;
+      }
+      .cert-title {
+        font-size: 22px;
       }
       .cert-prize-name {
-        font-size: 24px;
+        font-size: 22px;
+      }
+      .cert-desc {
+        font-size: 12px;
+        padding: 10px 12px;
       }
       .cert-stamp {
-        width: 74px;
-        height: 74px;
+        width: 72px;
+        height: 72px;
         font-size: 8px;
-        right: 8px;
+        right: 4px;
         bottom: -10px;
       }
       .cert-actions {
         grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .btn-cert-primary, .btn-cert-secondary {
+        padding: 12px;
+        font-size: 13px;
       }
     }
   </style>
@@ -1184,11 +1316,14 @@
         <div class="hero-info">
           <div class="badge-tag">
             <span class="badge-dot"></span>
-            2026 特别企划 · 温依婷 (WYT) 专属陪伴权益抽取
+            🌸 2026 特别企划 · 温温专属陪伴权益抽取
           </div>
-          <h2 class="main-title">今天，温依婷要陪牛昊文<br><span>多久呢</span></h2>
+          <h2 class="main-title">
+            <span class="title-top">今天，温温要陪昊文</span>
+            <span class="title-bottom">多久呢</span>
+          </h2>
           <p class="sub-lead">
-            欢迎来到牛昊文与温依婷的专属幸运大转盘！本次抽奖遵循《牛昊文❤️温依婷最高恋爱幸福公约》，涵盖从半小时贴心相伴到【三生三世】永恒羁绊等12项专属特权。一旦中奖，系统将立即签发防伪公证书，概不退换，最终解释权归牛昊文所有，执行权归温依婷亲自打卡！
+            欢迎来到昊文与温温的专属幸运大转盘！本次抽奖遵循《昊文❤️温温最高恋爱幸福公约》，涵盖从半小时贴心相伴到【三生三世】永恒羁绊等12项专属特权。一旦中奖，系统将立即签发防伪公证书，概不退换，最终解释权归昊文所有，执行权归温温亲自打卡！
           </p>
 
           <div class="stats-card">
@@ -1208,7 +1343,7 @@
 
           <div class="notice-box">
             <strong>💌 兑奖必读：</strong>
-            请温依婷小仙女点击大转盘中心或按空格键启动命运轮盘。抽中后请务必点击“签发公证书”截图发给牛昊文存证，作为日后撒娇、贴贴、索要陪伴的唯一法律效力凭证！
+            请温温小可爱点击大转盘中心或按空格键启动命运轮盘。抽中后请务必点击“签发公证书”截图发给昊文存证，作为日后撒娇、贴贴、索要陪伴的唯一法律效力凭证！
           </div>
         </div>
 
@@ -2282,13 +2417,13 @@
 
     /* ================= 屏幕任意点击飘爱心与情话特效 ================= */
     const LOVE_WORDS = [
-      "牛昊文 ❤️ 温依婷", "依婷超美 🌸", "昊文永远爱你 💖", "想一直陪着依婷 ✨",
-      "心动啦 ❤️", "最喜欢依婷 🎀", "三生有幸 💍", "做我永远的小公主 👑",
+      "温温 ❤️ 昊文", "温温最美 🌸", "昊文永远爱温温 💖", "想一直陪着温温 ✨",
+      "心动啦 ❤️", "最喜欢温温 🎀", "三生有幸 💍", "做我永远的小朋友 👑",
       "甜度爆表 🍬", "一眼万年 🌟"
     ];
-    document.addEventListener("click", function(e) {
+    document.addEventListener("pointerdown", function(e) {
       // 排除弹窗与按钮上的普通点击阻断
-      if (e.target.closest("#spinCenterBtn") || e.target.closest(".cert-actions")) return;
+      if (e.target.closest("#spinCenterBtn") || e.target.closest(".cert-actions") || e.target.closest("button") || e.target.closest("#wheelPointer")) return;
 
       const heart = document.createElement("div");
       heart.className = "click-heart";
