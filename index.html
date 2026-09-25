@@ -1,0 +1,2396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#ff758c">
+  <title>❤️ 恋爱陪伴时间专属大转盘 · 官方公证处 ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff4d6d;
+      --primary-light: #ff758c;
+      --primary-gradient: linear-gradient(135deg, #ff758c 0%, #ff4d6d 50%, #c9184a 100%);
+      --pink-soft: #fff0f3;
+      --pink-bg: #ffe5ec;
+      --gold: #ffb703;
+      --gold-light: #ffeaa7;
+      --text-dark: #590d22;
+      --text-soft: #800f2f;
+      --text-muted: #a4133c;
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --glass-border: rgba(255, 182, 193, 0.45);
+      --shadow-pink: 0 12px 36px rgba(255, 77, 109, 0.18);
+      --shadow-glow: 0 0 25px rgba(255, 77, 109, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: var(--text-dark);
+      background: radial-gradient(circle at 50% 10%, #fff0f5 0%, #ffd6e0 50%, #ffccd5 100%);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* 弥漫飘动的粉色爱心画布 */
+    #heartCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 烟花礼花画布 */
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    /* 页面内容容器 */
+    .app-container {
+      position: relative;
+      z-index: 2;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px 20px 60px;
+    }
+
+    /* 顶部导航与浪漫徽章 */
+    header.header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 40px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 20px rgba(255, 107, 129, 0.12);
+      margin-bottom: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 24px;
+      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+      animation: heartPulse 2s infinite ease-in-out;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); box-shadow: 0 6px 22px rgba(255, 77, 109, 0.6); }
+    }
+
+    .brand-text h1 {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: 0.5px;
+    }
+
+    .brand-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-pill {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 117, 140, 0.35);
+      color: var(--text-soft);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 8px rgba(255, 117, 140, 0.1);
+    }
+
+    .btn-pill:hover {
+      background: #fff;
+      color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 77, 109, 0.2);
+    }
+
+    /* 主视窗区：左侧文案与公证条目，右侧大转盘 */
+    .hero-section {
+      display: grid;
+      grid-template-columns: 1fr 1.08fr;
+      gap: 36px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    /* 左侧告白与公证头条 */
+    .hero-info {
+      padding: 10px;
+    }
+
+    .badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 77, 109, 0.3);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      box-shadow: 0 2px 10px rgba(255, 77, 109, 0.12);
+      margin-bottom: 18px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff4d6d;
+      box-shadow: 0 0 10px #ff4d6d;
+      animation: blink 1.4s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    .main-title {
+      font-family: 'Noto Serif SC', "Songti SC", serif;
+      font-size: clamp(32px, 4.2vw, 54px);
+      font-weight: 900;
+      line-height: 1.25;
+      color: #4a0018;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 15px rgba(255, 117, 140, 0.25);
+    }
+
+    .main-title span {
+      background: linear-gradient(135deg, #ff1461, #ff758c 60%, #c9184a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+
+    .main-title span::after {
+      content: " ❤️";
+      -webkit-text-fill-color: initial;
+    }
+
+    .sub-lead {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-soft);
+      margin-bottom: 24px;
+      max-width: 480px;
+    }
+
+    .stats-card {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: var(--shadow-pink);
+      margin-bottom: 24px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-item .stat-num {
+      display: block;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--primary);
+      font-family: 'ZCOOL KuaiLe', cursive, sans-serif;
+    }
+
+    .stat-item .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .notice-box {
+      background: linear-gradient(135deg, rgba(255, 240, 243, 0.95), rgba(255, 229, 236, 0.95));
+      border-left: 4px solid var(--primary);
+      border-radius: 0 16px 16px 0;
+      padding: 14px 18px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-dark);
+      box-shadow: 0 4px 16px rgba(255, 77, 109, 0.08);
+    }
+
+    .notice-box strong {
+      color: var(--primary);
+    }
+
+    /* 右侧：幸运大转盘展示舞台 */
+    .wheel-stage {
+      position: relative;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 36px;
+      padding: 24px;
+      border: 2px solid rgba(255, 182, 193, 0.5);
+      box-shadow: 0 20px 60px rgba(255, 77, 109, 0.25), inset 0 0 30px rgba(255, 255, 255, 0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stage-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 0 6px;
+    }
+
+    .stage-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .fair-tag {
+      background: #ffe3e8;
+      color: var(--primary);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* 转盘容器包装 */
+    .wheel-container {
+      position: relative;
+      width: min(100%, 460px);
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 8px 0;
+    }
+
+    /* 外圈跑马灯装饰圈 */
+    .wheel-outer-ring {
+      position: absolute;
+      inset: -14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff758c, #ffccd5, #ff4d6d, #ffd166);
+      box-shadow: 0 0 35px rgba(255, 77, 109, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.6);
+      z-index: 1;
+      animation: rotateRing 30s linear infinite;
+    }
+
+    @keyframes rotateRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* 外圈星星跑马灯小圆点 */
+    .wheel-lights {
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .wheel-canvas {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      filter: drop-shadow(0 10px 20px rgba(128, 15, 47, 0.2));
+      transition: transform 5s cubic-bezier(0.15, 0.85, 0.15, 1);
+    }
+
+    /* 指针爱心造型 */
+    .wheel-pointer {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      width: 48px;
+      height: 64px;
+      filter: drop-shadow(0 6px 12px rgba(128, 15, 47, 0.35));
+      cursor: pointer;
+    }
+
+    .pointer-arrow {
+      width: 0;
+      height: 0;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-top: 36px solid #ff1461;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .pointer-heart {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #ff4d6d, #c9184a);
+      border: 3px solid #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    /* 中心抽奖大按钮 */
+    .wheel-center-btn {
+      position: absolute;
+      z-index: 8;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 106px;
+      height: 106px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff 0%, #ffe5ec 30%, #ff4d6d 70%, #a4133c 100%);
+      border: 6px solid #ffffff;
+      box-shadow: 0 8px 25px rgba(201, 24, 74, 0.45), inset 0 2px 6px rgba(255, 255, 255, 0.8);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .wheel-center-btn:hover {
+      transform: translate(-50%, -50%) scale(1.06);
+      box-shadow: 0 12px 30px rgba(201, 24, 74, 0.6), inset 0 2px 8px rgba(255, 255, 255, 0.9);
+    }
+
+    .wheel-center-btn:active {
+      transform: translate(-50%, -50%) scale(0.96);
+    }
+
+    .wheel-center-btn span.heart-icon {
+      font-size: 22px;
+      margin-bottom: 2px;
+      animation: heartbeat 1.2s infinite ease-in-out;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14% { transform: scale(1.25); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.25); }
+      70% { transform: scale(1); }
+    }
+
+    .wheel-center-btn span.btn-text {
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .wheel-center-btn span.btn-sub {
+      font-size: 9px;
+      opacity: 0.9;
+      transform: scale(0.9);
+    }
+
+    .stage-footer {
+      width: 100%;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(255, 117, 140, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .stage-footer .status-text {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 奖品展示区与卡片矩阵 */
+    .prizes-section {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 32px;
+      padding: 32px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-pink);
+      margin-bottom: 36px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 117, 140, 0.2);
+    }
+
+    .section-header h2 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-header p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .prize-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .prize-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 18px 16px;
+      border: 1px solid rgba(255, 182, 193, 0.5);
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .prize-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 28px rgba(255, 77, 109, 0.18);
+      border-color: var(--primary-light);
+    }
+
+    .prize-card.mythic {
+      background: linear-gradient(145deg, #fff5f7 0%, #ffe5ec 100%);
+      border: 2px solid #ff758c;
+      box-shadow: 0 8px 24px rgba(255, 77, 109, 0.22);
+    }
+
+    .prize-card.mythic::after {
+      content: "👑 特等神话";
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: var(--primary-gradient);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 0 0 0 10px;
+    }
+
+    .prize-card.legend {
+      background: linear-gradient(145deg, #fff9f0 0%, #ffeacc 100%);
+      border: 2px solid #ffb703;
+      box-shadow: 0 8px 24px rgba(255, 183, 3, 0.2);
+    }
+
+    .prize-card.legend::after {
+      content: "💍 终身传说";
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: linear-gradient(135deg, #ffb703, #fb8500);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 0 0 0 10px;
+    }
+
+    .prize-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .prize-time-badge {
+      background: #ffe3e8;
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    .prize-card.legend .prize-time-badge {
+      background: #ffedd5;
+      color: #d97706;
+    }
+
+    .prize-icon {
+      font-size: 26px;
+    }
+
+    .prize-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .prize-desc {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-soft);
+      opacity: 0.88;
+    }
+
+    /* 历史记录与规则区 */
+    .bottom-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .panel-box {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 28px;
+      padding: 26px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-pink);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed rgba(255, 117, 140, 0.3);
+    }
+
+    .panel-header h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .history-list::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .history-list::-webkit-scrollbar-thumb {
+      background: #ffccd5;
+      border-radius: 10px;
+    }
+
+    .history-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 182, 193, 0.4);
+      transition: all 0.2s;
+    }
+
+    .history-item:hover {
+      background: #fff8f9;
+      transform: translateX(3px);
+    }
+
+    .history-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .history-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #ffe3e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .history-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .history-sn {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .history-time {
+      font-size: 11px;
+      color: #9d8189;
+    }
+
+    .empty-history {
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .empty-history .icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+      display: block;
+      opacity: 0.6;
+    }
+
+    /* 规则清单 */
+    .rule-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .rule-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-soft);
+    }
+
+    .rule-num {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary-gradient);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .rule-text strong {
+      color: var(--primary);
+    }
+
+    /* 弹窗：国家级恋爱公证书大奖凭证 */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(43, 8, 18, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .certificate-card {
+      position: relative;
+      width: min(540px, 100%);
+      background: #fffdfa;
+      border-radius: 28px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+      padding: 34px 28px;
+      border: 3px solid #ffccd5;
+      transform: scale(0.85);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active .certificate-card {
+      transform: scale(1);
+    }
+
+    /* 证书内部古雅花边边框 */
+    .cert-inner-border {
+      border: 2px solid #e09f3e;
+      border-radius: 18px;
+      padding: 24px 20px;
+      position: relative;
+      background: radial-gradient(circle at 50% 50%, #fffdfa 0%, #fff6ee 100%);
+    }
+
+    .cert-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #ffe3e8;
+      border: none;
+      color: var(--primary);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: transform 0.2s;
+    }
+
+    .cert-close-btn:hover {
+      transform: scale(1.15) rotate(90deg);
+    }
+
+    .cert-header {
+      text-align: center;
+      margin-bottom: 20px;
+      border-bottom: 2px dashed rgba(224, 159, 62, 0.4);
+      padding-bottom: 14px;
+    }
+
+    .cert-badge {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #9c6644;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .cert-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: #7f1d1d;
+      letter-spacing: 1px;
+    }
+
+    .cert-subtitle {
+      font-size: 11px;
+      color: #b08968;
+      letter-spacing: 3px;
+      margin-top: 4px;
+    }
+
+    .cert-body {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .cert-congrats {
+      font-size: 13px;
+      color: #7f1d1d;
+      margin-bottom: 8px;
+    }
+
+    .cert-prize-name {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(26px, 5vw, 36px);
+      font-weight: 900;
+      color: #ff1461;
+      text-shadow: 0 2px 10px rgba(255, 20, 97, 0.2);
+      margin: 8px 0;
+    }
+
+    .cert-time-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff758c, #ff4d6d);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(255, 77, 109, 0.3);
+    }
+
+    .cert-desc {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #582f0e;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(224, 159, 62, 0.25);
+      margin-bottom: 18px;
+    }
+
+    /* 证书信息栏与公章印章 */
+    .cert-meta-wrap {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      text-align: left;
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(224, 159, 62, 0.2);
+      margin-bottom: 18px;
+    }
+
+    .cert-meta-item label {
+      color: #9c6644;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .cert-meta-item span {
+      font-weight: 700;
+      color: #7f1d1d;
+    }
+
+    /* 红色爱心公章 */
+    .cert-stamp {
+      position: absolute;
+      right: 18px;
+      bottom: -15px;
+      width: 90px;
+      height: 90px;
+      border: 3px solid #dc2626;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #dc2626;
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1.2;
+      transform: rotate(-15deg);
+      background: rgba(254, 226, 226, 0.25);
+      box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.15);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .cert-stamp .stamp-star {
+      font-size: 16px;
+      margin: 1px 0;
+    }
+
+    /* 按钮组 */
+    .cert-actions {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .btn-cert-primary {
+      background: var(--primary-gradient);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 77, 109, 0.35);
+      transition: all 0.2s;
+    }
+
+    .btn-cert-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 77, 109, 0.5);
+    }
+
+    .btn-cert-secondary {
+      background: #ffffff;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      padding: 14px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-cert-secondary:hover {
+      background: #fff5f7;
+    }
+
+    /* 提示 Toast */
+    .toast-box {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: rgba(74, 0, 24, 0.92);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .toast-box.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* 飘浮浪漫爱心点击粒子 */
+    .click-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 999;
+      transform: translate(-50%, -50%);
+      font-weight: 900;
+      user-select: none;
+      animation: floatUpFade 1.2s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+    }
+
+    @keyframes floatUpFade {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+      }
+      50% {
+        opacity: 0.9;
+        transform: translate(-50%, -120%) scale(1.15) rotate(15deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -180%) scale(1) rotate(-15deg);
+      }
+    }
+
+    /* 底部声明 */
+    footer.page-footer {
+      margin-top: 48px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    footer.page-footer strong {
+      color: var(--primary);
+    }
+
+    /* 响应式适配 */
+    @media (max-width: 960px) {
+      .hero-section {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .prize-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .bottom-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .app-container {
+        padding: 12px 14px 40px;
+      }
+      header.header {
+        padding: 10px 14px;
+        margin-bottom: 16px;
+      }
+      .brand-text h1 {
+        font-size: 15px;
+      }
+      .main-title {
+        font-size: 30px;
+      }
+      .stats-card {
+        padding: 12px;
+        gap: 6px;
+      }
+      .stat-item .stat-num {
+        font-size: 17px;
+      }
+      .wheel-stage {
+        padding: 16px 12px;
+        border-radius: 28px;
+      }
+      .wheel-center-btn {
+        width: 86px;
+        height: 86px;
+      }
+      .wheel-center-btn span.btn-text {
+        font-size: 14px;
+      }
+      .prizes-section {
+        padding: 20px 16px;
+        border-radius: 24px;
+      }
+      .prize-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .panel-box {
+        padding: 18px 14px;
+      }
+      .cert-inner-border {
+        padding: 18px 12px;
+      }
+      .cert-prize-name {
+        font-size: 24px;
+      }
+      .cert-stamp {
+        width: 74px;
+        height: 74px;
+        font-size: 8px;
+        right: 8px;
+        bottom: -10px;
+      }
+      .cert-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 全屏爱心与礼花背景 -->
+  <canvas id="heartCanvas"></canvas>
+  <canvas id="confettiCanvas"></canvas>
+
+  <div class="app-container">
+    <!-- 顶部导航 -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand-icon" id="loveLogo" title="恋爱公证处 · 官方认证">❤️</div>
+        <div class="brand-text">
+          <h1>国家级恋爱陪伴时间抽签中心</h1>
+          <p>OFFICIAL LOVE DRAWING AUTHORITY</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn-pill" id="soundToggleBtn">
+          <span id="soundIcon">🔊</span> <span id="soundText">浪漫音效</span>
+        </button>
+        <button class="btn-pill" id="viewHistoryTopBtn">
+          <span>📜</span> <span>开奖公报</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 主展示区：文案 + 大转盘 -->
+    <main>
+      <section class="hero-section">
+        <!-- 左侧浪漫号召 -->
+        <div class="hero-info">
+          <div class="badge-tag">
+            <span class="badge-dot"></span>
+            2026 特别企划 · 女朋友专属陪伴权益抽取
+          </div>
+          <h2 class="main-title">今天，你要陪我<br><span>多久呢</span></h2>
+          <p class="sub-lead">
+            欢迎来到专属幸运大转盘！本次抽奖遵循《最高恋爱幸福公约》，涵盖从半小时贴心相伴到【三生三世】永恒羁绊等12项专属特权。一旦中奖，系统将立即签发防伪公证书，概不退换，解释权归男朋友所有，执行权归女朋友亲自打卡！
+          </p>
+
+          <div class="stats-card">
+            <div class="stat-item">
+              <span class="stat-num" id="totalDrawCount">0</span>
+              <span class="stat-label">今日已抽次数</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">100%</span>
+              <span class="stat-label">心动中奖率</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">永久</span>
+              <span class="stat-label">履约有效期</span>
+            </div>
+          </div>
+
+          <div class="notice-box">
+            <strong>💌 兑奖必读：</strong>
+            请点击大转盘中心或按空格键启动命运轮盘。抽中后请务必点击“签发公证书”截图存证，作为日后撒娇、贴贴、索要陪伴的唯一法律效力凭证！
+          </div>
+        </div>
+
+        <!-- 右侧大转盘舞台 -->
+        <div class="wheel-stage">
+          <div class="stage-header">
+            <div class="stage-title">
+              <span>💖</span> 陪伴时间命运大转盘
+            </div>
+            <span class="fair-tag">✨ 真随机 · 命中注定</span>
+          </div>
+
+          <div class="wheel-container">
+            <!-- 跑马灯外圈装饰 -->
+            <div class="wheel-outer-ring"></div>
+            
+            <!-- 指针 -->
+            <div class="wheel-pointer" id="wheelPointer">
+              <div class="pointer-arrow"></div>
+              <div class="pointer-heart">❤</div>
+            </div>
+
+            <!-- 转盘 Canvas -->
+            <canvas id="wheelCanvas" class="wheel-canvas" width="800" height="800"></canvas>
+
+            <!-- 中心抽奖按钮 -->
+            <button class="wheel-center-btn" id="spinCenterBtn">
+              <span class="heart-icon">💖</span>
+              <span class="btn-text">点击抽奖</span>
+              <span class="btn-sub">SPIN LOVE</span>
+            </button>
+          </div>
+
+          <div class="stage-footer">
+            <div class="status-text">
+              <span>🎯</span>
+              <span id="currentStatusText">点击中心按钮，转动甜蜜时光</span>
+            </div>
+            <div id="lastPrizeTag" style="font-weight: 700; color: var(--primary);"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 奖品全览一览表 -->
+      <section class="prizes-section">
+        <div class="section-header">
+          <div>
+            <h2><span>🎁</span> 官方公证奖池全集</h2>
+            <p>共 12 阶专属陪伴特权，无论抽到哪一项都是满满爱意</p>
+          </div>
+          <span style="font-size: 12px; color: var(--primary); font-weight: 700;">★ 终身履约保障 ★</span>
+        </div>
+
+        <div class="prize-grid" id="prizeGridList">
+          <!-- JS 自动生成 12 个奖项卡片 -->
+        </div>
+      </section>
+
+      <!-- 下方双栏：开奖公报 & 甜蜜约定公约 -->
+      <section class="bottom-layout">
+        <!-- 开奖历史 -->
+        <div class="panel-box" id="historyPanel">
+          <div class="panel-header">
+            <h3><span>📜</span> 陪伴兑换公报历史</h3>
+            <button class="btn-pill" id="clearHistoryBtn" style="padding: 4px 10px; font-size: 11px;">清空记录</button>
+          </div>
+          <div class="history-list" id="historyList">
+            <!-- 记录动态渲染 -->
+          </div>
+        </div>
+
+        <!-- 甜蜜规则公约 -->
+        <div class="panel-box">
+          <div class="panel-header">
+            <h3><span>📝</span> 恋爱特别公证处履约细则</h3>
+          </div>
+          <div class="rule-list">
+            <div class="rule-item">
+              <div class="rule-num">1</div>
+              <div class="rule-text">
+                <strong>即刻生效原则：</strong> 转盘停止并显示公证书后，本轮结果即刻具结。双方不得以“刚才没看清”、“网卡了”为由反悔。
+              </div>
+            </div>
+            <div class="rule-item">
+              <div class="rule-num">2</div>
+              <div class="rule-text">
+                <strong>神级奖项专属保障：</strong> 凡抽中【一辈子】与【三生三世】者，享受天长地久特级保护，柴米油盐皆有我，此生深情绝不负。
+              </div>
+            </div>
+            <div class="rule-item">
+              <div class="rule-num">3</div>
+              <div class="rule-text">
+                <strong>无限回档豁免权：</strong> 如不幸抽中或额外抽中【亲一口再抽一次】，持有人只需亲男朋友一口，即可无条件重转轮盘！
+              </div>
+            </div>
+            <div class="rule-item">
+              <div class="rule-num">4</div>
+              <div class="rule-text">
+                <strong>截图存证义务：</strong> 强烈建议抽中后点击【保存公证书存证】，发送至微信聊天界面进行甜蜜打卡公示。
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 底部版权与声明 -->
+    <footer class="page-footer">
+      <p>❤️ <strong>国家级恋爱陪伴时间抽签中心</strong> · 专属情侣公证系统 ❤️</p>
+      <p>本系统采用纯前端高精度加密随机器，所有爱意真实有效，有效期直至地老天荒。</p>
+    </footer>
+  </div>
+
+  <!-- 弹窗：国家级恋爱陪伴权益公证书 -->
+  <div class="modal-overlay" id="certModal">
+    <div class="certificate-card" id="certCard">
+      <button class="cert-close-btn" id="closeCertBtn">✕</button>
+      <div class="cert-inner-border">
+        <div class="cert-header">
+          <div class="cert-badge">MINISTRY OF LOVE · CERTIFICATE</div>
+          <h3 class="cert-title">恋爱陪伴权益公证书</h3>
+          <div class="cert-subtitle">中华人民共和国恋爱民政总署 · 特别签发</div>
+        </div>
+
+        <div class="cert-body">
+          <div class="cert-congrats">🎉 恭喜小可爱！本次转盘郑重抽中：</div>
+          <div class="cert-prize-name" id="modalPrizeTitle">【三生三世】至尊陪伴包</div>
+          <div class="cert-time-tag" id="modalPrizeDur">期限：生生世世</div>
+          <div class="cert-desc" id="modalPrizeDesc">
+            孟婆汤里也得把你挑出来，投胎自带雷达定位，下辈子、下下辈子你都归我！
+          </div>
+
+          <div class="cert-meta-wrap">
+            <div class="cert-meta-item">
+              <label>公证单号</label>
+              <span id="modalCertSn">LOVE-2026-9999</span>
+            </div>
+            <div class="cert-meta-item">
+              <label>签发时间</label>
+              <span id="modalCertTime">2026-09-25 23:20</span>
+            </div>
+            <div class="cert-meta-item">
+              <label>承办人</label>
+              <span>全世界最爱你的男朋友</span>
+            </div>
+            <div class="cert-meta-item">
+              <label>履约监督</label>
+              <span>一生一世不离不弃局</span>
+            </div>
+
+            <!-- 专属红色公章 -->
+            <div class="cert-stamp">
+              <span>恋爱公证处</span>
+              <span class="stamp-star">★</span>
+              <span>永久生效</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cert-actions">
+          <button class="btn-cert-primary" id="saveCertBtn">
+            📸 保存公证书（截图存证）
+          </button>
+          <button class="btn-cert-secondary" id="spinAgainModalBtn">
+            再抽一次 💖
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast 提示框 -->
+  <div class="toast-box" id="toastBox">提示信息</div>
+
+  <!-- 隐藏的 Canvas 用于高质量生成证书海报图片下载 -->
+  <canvas id="exportCanvas" style="display: none;"></canvas>
+
+  <script>
+    "use strict";
+
+    /* ================= 12 个极其夸张、浪漫的情侣奖项 ================= */
+    const PRIZES = [
+      {
+        id: 1,
+        title: "三生三世",
+        fullName: "【三生三世】至尊情缘永恒包",
+        tag: "神话隐藏",
+        duration: "三生三世 · 永不分离",
+        desc: "孟婆汤里也得把你挑出来，投胎自带心动雷达定位！今生、来世、下下辈子，你的时间全都归我管！",
+        icon: "👑",
+        type: "mythic",
+        color: "#ff3366",
+        bgColor: "#ffe3eb"
+      },
+      {
+        id: 2,
+        title: "一辈子",
+        fullName: "【一辈子】终身独家陪伴权",
+        tag: "传说大奖",
+        duration: "终生承包 · 直至白头",
+        desc: "从清晨到日暮，从青丝到白发。包揽往后余生的所有柴米油盐、诗情画意与无理取闹！",
+        icon: "💍",
+        type: "legend",
+        color: "#e63946",
+        bgColor: "#fff0f3"
+      },
+      {
+        id: 3,
+        title: "十年长约",
+        fullName: "【十年】黄金陪伴大合约",
+        tag: "史诗巨献",
+        duration: "3650天 · 超长合约",
+        desc: "签订未来十年共同生活规划书，适用于所有'等我们以后'的承诺，中途无条件自动续约！",
+        icon: "🌟",
+        type: "epic",
+        color: "#fb8500",
+        bgColor: "#fff4e6"
+      },
+      {
+        id: 4,
+        title: "365天",
+        fullName: "【365天】全年无休陪伴卡",
+        tag: "浪漫年度",
+        duration: "一整年 · 专属侍从",
+        desc: "春夏秋冬全年在岗！包含随叫随到、情绪按摩、生病哄睡及随时索要抱抱无限次特权！",
+        icon: "💖",
+        type: "epic",
+        color: "#ff4d6d",
+        bgColor: "#ffe5ec"
+      },
+      {
+        id: 5,
+        title: "100天",
+        fullName: "【100天】高甜恋爱续费包",
+        tag: "甜蜜百日",
+        duration: "100天 · 专属高甜",
+        desc: "每天至少讲3个好笑段子，附带每日爱意夸奖，兼任全天候美食雷达与贴身拎包官！",
+        icon: "🎁",
+        type: "rare",
+        color: "#d90429",
+        bgColor: "#ffe3e8"
+      },
+      {
+        id: 6,
+        title: "30天待机",
+        fullName: "【30天】超长待机月度卡",
+        tag: "包月畅享",
+        duration: "整整一个月",
+        desc: "享受早安吻晚安吻打卡服务，外加无限制撒娇绿色通道，惹你生气立即手写检讨书！",
+        icon: "🌸",
+        type: "rare",
+        color: "#c9184a",
+        bgColor: "#fff0f3"
+      },
+      {
+        id: 7,
+        title: "连续7天",
+        fullName: "【连续7天】无条件听话周",
+        tag: "女王周卡",
+        duration: "整整一周",
+        desc: "这7天内你说吃啥就吃啥，你说去哪就去哪，绝不说'随便'，执行力达到国家一级标准！",
+        icon: "🎀",
+        type: "special",
+        color: "#a4133c",
+        bgColor: "#ffe5ec"
+      },
+      {
+        id: 8,
+        title: "豪华周末",
+        fullName: "【专属周末】全天候双休包",
+        tag: "周末连休",
+        duration: "周六至周日 48H",
+        desc: "周末48小时全面承包！电影、逛街、做饭、睡懒觉，做你最舒服的专属靠垫！",
+        icon: "🍹",
+        type: "special",
+        color: "#ff758c",
+        bgColor: "#fff5f7"
+      },
+      {
+        id: 9,
+        title: "一整天",
+        fullName: "【一整天】24小时贴贴卡",
+        tag: "全日连麦",
+        duration: "24 小时",
+        desc: "无论线上还是线下，只要你一抬头就能看见我！手机24小时在线，绝不失联！",
+        icon: "☀️",
+        type: "normal",
+        color: "#e01a4f",
+        bgColor: "#ffe5ec"
+      },
+      {
+        id: 10,
+        title: "今晚包揽",
+        fullName: "【今晚】全部时间承包权",
+        tag: "浪漫良宵",
+        duration: "从现在至入睡",
+        desc: "放下手机，推掉所有琐事。今晚的时空完全冻结，只陪你聊天、发呆、听歌、看星空！",
+        icon: "🌙",
+        type: "normal",
+        color: "#800f2f",
+        bgColor: "#fff0f3"
+      },
+      {
+        id: 11,
+        title: "2小时约会",
+        fullName: "【2小时】高质量无手机约会",
+        tag: "专注甜蜜",
+        duration: "120 分钟",
+        desc: "眼睛里全是你！手机调为免打扰，全程牵手漫步，开启100%专注心动模式！",
+        icon: "☕",
+        type: "normal",
+        color: "#590d22",
+        bgColor: "#ffe5ec"
+      },
+      {
+        id: 12,
+        title: "亲一口重抽",
+        fullName: "【亲一口立即再抽一次】无限回档券",
+        tag: "撒娇特权",
+        duration: "立即生效 · 无限次",
+        desc: "什么？对结果不满意？只要主动亲男朋友一口，命运转盘立即倒流，无上限重抽！",
+        icon: "💋",
+        type: "easter",
+        color: "#ff0054",
+        bgColor: "#fff0f5"
+      }
+    ];
+
+    /* ================= 状态与配置 ================= */
+    const STORAGE_KEY = "LOVE_LOTTERY_HISTORY_V2026";
+    let isSpinning = false;
+    let currentRotation = 0;
+    let soundEnabled = true;
+    let cheatNextWinner = -1; // 男朋友专属彩蛋: 0=三生三世, 1=一辈子
+    let audioCtx = null;
+
+    /* ================= DOM 元素 ================= */
+    const wheelCanvas = document.getElementById("wheelCanvas");
+    const ctx = wheelCanvas.getContext("2d");
+    const spinCenterBtn = document.getElementById("spinCenterBtn");
+    const wheelPointer = document.getElementById("wheelPointer");
+    const prizeGridList = document.getElementById("prizeGridList");
+    const historyList = document.getElementById("historyList");
+    const totalDrawCount = document.getElementById("totalDrawCount");
+    const currentStatusText = document.getElementById("currentStatusText");
+    const lastPrizeTag = document.getElementById("lastPrizeTag");
+    const soundToggleBtn = document.getElementById("soundToggleBtn");
+    const soundIcon = document.getElementById("soundIcon");
+    const soundText = document.getElementById("soundText");
+    const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+    const viewHistoryTopBtn = document.getElementById("viewHistoryTopBtn");
+    const loveLogo = document.getElementById("loveLogo");
+
+    /* 弹窗元素 */
+    const certModal = document.getElementById("certModal");
+    const certCard = document.getElementById("certCard");
+    const closeCertBtn = document.getElementById("closeCertBtn");
+    const modalPrizeTitle = document.getElementById("modalPrizeTitle");
+    const modalPrizeDur = document.getElementById("modalPrizeDur");
+    const modalPrizeDesc = document.getElementById("modalPrizeDesc");
+    const modalCertSn = document.getElementById("modalCertSn");
+    const modalCertTime = document.getElementById("modalCertTime");
+    const saveCertBtn = document.getElementById("saveCertBtn");
+    const spinAgainModalBtn = document.getElementById("spinAgainModalBtn");
+    const toastBox = document.getElementById("toastBox");
+
+    /* ================= 背景爱心飘落粒子系统 ================= */
+    const heartCanvas = document.getElementById("heartCanvas");
+    const hCtx = heartCanvas.getContext("2d");
+    let hearts = [];
+
+    function resizeHeartCanvas() {
+      heartCanvas.width = window.innerWidth;
+      heartCanvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeHeartCanvas);
+    resizeHeartCanvas();
+
+    class FloatingHeart {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * heartCanvas.width;
+        this.y = heartCanvas.height + 20 + Math.random() * 50;
+        this.size = Math.random() * 16 + 8;
+        this.speedY = Math.random() * 1.2 + 0.6;
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.opacity = Math.random() * 0.55 + 0.25;
+        this.rot = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.03;
+        const pinkColors = ["#ff4d6d", "#ff758c", "#ff8fab", "#ffb3c6", "#ffa8ba"];
+        this.color = pinkColors[Math.floor(Math.random() * pinkColors.length)];
+      }
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX + Math.sin(this.y * 0.01) * 0.4;
+        this.rot += this.rotSpeed;
+        if (this.y < -30) {
+          this.reset();
+        }
+      }
+      draw() {
+        hCtx.save();
+        hCtx.translate(this.x, this.y);
+        hCtx.rotate(this.rot);
+        hCtx.globalAlpha = this.opacity;
+        hCtx.fillStyle = this.color;
+        
+        // 绘制心形
+        const s = this.size;
+        hCtx.beginPath();
+        hCtx.moveTo(0, s * 0.3);
+        hCtx.bezierCurveTo(-s * 0.5, -s * 0.3, -s, s * 0.1, 0, s);
+        hCtx.bezierCurveTo(s, s * 0.1, s * 0.5, -s * 0.3, 0, s * 0.3);
+        hCtx.fill();
+        hCtx.restore();
+      }
+    }
+
+    for (let i = 0; i < 35; i++) {
+      hearts.push(new FloatingHeart());
+    }
+
+    function animateHearts() {
+      hCtx.clearRect(0, 0, heartCanvas.width, heartCanvas.height);
+      hearts.forEach(h => {
+        h.update();
+        h.draw();
+      });
+      requestAnimationFrame(animateHearts);
+    }
+    animateHearts();
+
+    /* ================= 全屏爱心喷射彩带系统 (Confetti) ================= */
+    const confCanvas = document.getElementById("confettiCanvas");
+    const cCtx = confCanvas.getContext("2d");
+    let confettiParticles = [];
+    let confettiAnimId = null;
+
+    function resizeConfCanvas() {
+      confCanvas.width = window.innerWidth;
+      confCanvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeConfCanvas);
+    resizeConfCanvas();
+
+    function fireRomanticConfetti() {
+      resizeConfCanvas();
+      confettiParticles = [];
+      const colors = ["#ff0a54", "#ff477e", "#ff70a6", "#ff85a1", "#fbb1bd", "#f7cad0", "#ffb703", "#ffd166"];
+      
+      for (let i = 0; i < 160; i++) {
+        confettiParticles.push({
+          x: confCanvas.width / 2 + (Math.random() - 0.5) * 100,
+          y: confCanvas.height * 0.4,
+          vx: (Math.random() - 0.5) * 16,
+          vy: -Math.random() * 15 - 5,
+          size: Math.random() * 12 + 6,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 12,
+          gravity: 0.38,
+          opacity: 1,
+          shape: Math.random() > 0.4 ? "heart" : "ribbon"
+        });
+      }
+      
+      if (confettiAnimId) cancelAnimationFrame(confettiAnimId);
+      animateConfetti();
+    }
+
+    function animateConfetti() {
+      cCtx.clearRect(0, 0, confCanvas.width, confCanvas.height);
+      let aliveCount = 0;
+      
+      confettiParticles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += p.gravity;
+        p.rotation += p.rotSpeed;
+        p.opacity -= 0.007;
+
+        if (p.opacity > 0 && p.y < confCanvas.height + 50) {
+          aliveCount++;
+          cCtx.save();
+          cCtx.translate(p.x, p.y);
+          cCtx.rotate((p.rotation * Math.PI) / 180);
+          cCtx.globalAlpha = Math.max(0, p.opacity);
+          cCtx.fillStyle = p.color;
+
+          if (p.shape === "heart") {
+            const s = p.size;
+            cCtx.beginPath();
+            cCtx.moveTo(0, s * 0.3);
+            cCtx.bezierCurveTo(-s * 0.5, -s * 0.3, -s, s * 0.1, 0, s);
+            cCtx.bezierCurveTo(s, s * 0.1, s * 0.5, -s * 0.3, 0, s * 0.3);
+            cCtx.fill();
+          } else {
+            cCtx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+          }
+          cCtx.restore();
+        }
+      });
+
+      if (aliveCount > 0) {
+        confettiAnimId = requestAnimationFrame(animateConfetti);
+      } else {
+        cCtx.clearRect(0, 0, confCanvas.width, confCanvas.height);
+      }
+    }
+
+    /* ================= Web Audio API 浪漫心跳与中奖音效 ================= */
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioClass) audioCtx = new AudioClass();
+      }
+      if (audioCtx && audioCtx.state === "suspended") {
+        audioCtx.resume().catch(() => {});
+      }
+      return audioCtx;
+    }
+
+    // 播放转盘指针哒哒声
+    function playTickSound() {
+      if (!soundEnabled) return;
+      const actx = getAudioContext();
+      if (!actx) return;
+      try {
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(587.33, actx.currentTime); // D5
+        gain.gain.setValueAtTime(0.04, actx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.05);
+        osc.connect(gain);
+        gain.connect(actx.destination);
+        osc.start();
+        osc.stop(actx.currentTime + 0.05);
+      } catch (e) {}
+    }
+
+    // 播放启动心跳声
+    function playHeartbeatSound() {
+      if (!soundEnabled) return;
+      const actx = getAudioContext();
+      if (!actx) return;
+      try {
+        const now = actx.currentTime;
+        [0, 0.22].forEach(offset => {
+          const osc = actx.createOscillator();
+          const gain = actx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(80, now + offset);
+          osc.frequency.exponentialRampToValueAtTime(45, now + offset + 0.12);
+          gain.gain.setValueAtTime(0.2, now + offset);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.14);
+          osc.connect(gain);
+          gain.connect(actx.destination);
+          osc.start(now + offset);
+          osc.stop(now + offset + 0.15);
+        });
+      } catch (e) {}
+    }
+
+    // 播放中奖浪漫梦幻和弦音
+    function playWinSound() {
+      if (!soundEnabled) return;
+      const actx = getAudioContext();
+      if (!actx) return;
+      try {
+        const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C E G C E
+        notes.forEach((freq, idx) => {
+          const osc = actx.createOscillator();
+          const gain = actx.createGain();
+          osc.type = "triangle";
+          osc.frequency.value = freq;
+          const startTime = actx.currentTime + idx * 0.09;
+          gain.gain.setValueAtTime(0.001, startTime);
+          gain.gain.exponentialRampToValueAtTime(0.12, startTime + 0.04);
+          gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.55);
+          osc.connect(gain);
+          gain.connect(actx.destination);
+          osc.start(startTime);
+          osc.stop(startTime + 0.6);
+        });
+      } catch (e) {}
+    }
+
+    /* ================= 绘制大转盘 ================= */
+    const NUM_SLICES = PRIZES.length;
+    const SLICE_ANGLE = (Math.PI * 2) / NUM_SLICES;
+
+    function drawWheel() {
+      const size = wheelCanvas.width;
+      const center = size / 2;
+      const radius = center - 16;
+
+      ctx.clearRect(0, 0, size, size);
+
+      // 绘制各扇形
+      for (let i = 0; i < NUM_SLICES; i++) {
+        const startAngle = i * SLICE_ANGLE - Math.PI / 2;
+        const endAngle = startAngle + SLICE_ANGLE;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(center, center);
+        ctx.arc(center, center, radius, startAngle, endAngle);
+        ctx.closePath();
+
+        // 浅粉、奶油白交替底色
+        ctx.fillStyle = i % 2 === 0 ? "#ffffff" : "#fff2f5";
+        if (PRIZES[i].type === "mythic") ctx.fillStyle = "#ffe0e9";
+        if (PRIZES[i].type === "legend") ctx.fillStyle = "#fff4e5";
+        ctx.fill();
+
+        // 扇区边框
+        ctx.strokeStyle = "rgba(255, 117, 140, 0.28)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // 绘制文字与图标
+        ctx.save();
+        ctx.translate(center, center);
+        ctx.rotate(startAngle + SLICE_ANGLE / 2);
+
+        // 文字排版：向外辐射
+        ctx.textAlign = "right";
+        ctx.textBaseline = "middle";
+        
+        // 奖项名称
+        ctx.fillStyle = PRIZES[i].color || "#590d22";
+        ctx.font = "bold 26px -apple-system, 'PingFang SC', sans-serif";
+        ctx.fillText(PRIZES[i].title, radius - 45, 0);
+
+        // 小图标
+        ctx.font = "24px sans-serif";
+        ctx.fillText(PRIZES[i].icon, radius - 15, 0);
+
+        ctx.restore();
+        ctx.restore();
+      }
+
+      // 绘制外圈金色与粉色双重包边
+      ctx.beginPath();
+      ctx.arc(center, center, radius, 0, Math.PI * 2);
+      ctx.strokeStyle = "#ff758c";
+      ctx.lineWidth = 8;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(center, center, radius + 5, 0, Math.PI * 2);
+      ctx.strokeStyle = "#ffd166";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // 绘制外圈浪漫圆点跑马灯
+      const numDots = 24;
+      for (let i = 0; i < numDots; i++) {
+        const angle = (i * Math.PI * 2) / numDots;
+        const dotX = center + Math.cos(angle) * (radius - 2);
+        const dotY = center + Math.sin(angle) * (radius - 2);
+        ctx.beginPath();
+        ctx.arc(dotX, dotY, 4, 0, Math.PI * 2);
+        ctx.fillStyle = i % 2 === 0 ? "#ff4d6d" : "#ffd166";
+        ctx.fill();
+      }
+    }
+
+    /* ================= 渲染奖池卡片矩阵 ================= */
+    function renderPrizeGrid() {
+      prizeGridList.innerHTML = "";
+      PRIZES.forEach((p, index) => {
+        const card = document.createElement("div");
+        card.className = `prize-card ${p.type}`;
+        card.innerHTML = `
+          <div>
+            <div class="prize-card-header">
+              <span class="prize-time-badge">${p.tag}</span>
+              <span class="prize-icon">${p.icon}</span>
+            </div>
+            <h4 class="prize-title">${p.fullName}</h4>
+            <p class="prize-desc">${p.desc}</p>
+          </div>
+          <div style="margin-top: 14px; font-size: 11px; font-weight: 700; color: ${p.color};">
+            ⏰ 履约期：${p.duration}
+          </div>
+        `;
+        prizeGridList.appendChild(card);
+      });
+    }
+
+    /* ================= 本地历史记录管理 ================= */
+    function getHistory() {
+      try {
+        const data = localStorage.getItem(STORAGE_KEY);
+        return data ? JSON.parse(data) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveHistory(record) {
+      const list = getHistory();
+      list.unshift(record);
+      if (list.length > 50) list.pop();
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      } catch (e) {}
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const list = getHistory();
+      totalDrawCount.textContent = list.length;
+      historyList.innerHTML = "";
+
+      if (list.length === 0) {
+        historyList.innerHTML = `
+          <div class="empty-history">
+            <span class="icon">💌</span>
+            <p>还没有开奖凭证哦，快去转动大转盘！</p>
+          </div>
+        `;
+        return;
+      }
+
+      list.slice(0, 10).forEach(item => {
+        const p = PRIZES[item.prizeIndex];
+        const row = document.createElement("div");
+        row.className = "history-item";
+        row.innerHTML = `
+          <div class="history-left">
+            <div class="history-icon">${p.icon}</div>
+            <div>
+              <div class="history-title">${p.fullName}</div>
+              <div class="history-sn">${item.sn} · ${item.time}</div>
+            </div>
+          </div>
+          <button class="btn-pill" style="padding: 4px 10px; font-size: 11px;" onclick="window.viewCertDetail(${item.prizeIndex}, '${item.sn}', '${item.time}')">
+            查看公证书
+          </button>
+        `;
+        historyList.appendChild(row);
+      });
+    }
+
+    /* ================= 生成公证书防伪编码 ================= */
+    function generateCertSN() {
+      const now = new Date();
+      const yr = now.getFullYear();
+      const mo = String(now.getMonth() + 1).padStart(2, '0');
+      const da = String(now.getDate()).padStart(2, '0');
+      const rand = Math.floor(1000 + Math.random() * 9000);
+      return `LOVE-${yr}${mo}${da}-${rand}`;
+    }
+
+    function formatTime(date) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      const hh = String(date.getHours()).padStart(2, '0');
+      const mm = String(date.getMinutes()).padStart(2, '0');
+      return `${y}-${m}-${d} ${hh}:${mm}`;
+    }
+
+    /* ================= 核心：开始抽奖与平滑物理缓动 ================= */
+    function spinWheel() {
+      if (isSpinning) return;
+      isSpinning = true;
+      spinCenterBtn.disabled = true;
+      closeCertModal();
+
+      // 决定中奖奖项索引
+      let winnerIndex = -1;
+      if (cheatNextWinner >= 0 && cheatNextWinner < NUM_SLICES) {
+        winnerIndex = cheatNextWinner;
+        cheatNextWinner = -1; // 用完重置
+      } else {
+        // 真随机加密生成
+        const randomBuffer = new Uint32Array(1);
+        window.crypto.getRandomValues(randomBuffer);
+        winnerIndex = randomBuffer[0] % NUM_SLICES;
+      }
+
+      const p = PRIZES[winnerIndex];
+      currentStatusText.textContent = "轮盘转动中，心跳加速中... 💓";
+      playHeartbeatSound();
+
+      // 每个扇区的角度：360 / 12 = 30 度
+      // 转盘顺时针旋转，指针在最顶部 (-90度)。
+      // 扇区 i 的中心在: i * 30 + 15 度。
+      // 最终角度使该扇区停在正上方
+      const sliceDeg = 360 / NUM_SLICES;
+      const targetSectorCenter = winnerIndex * sliceDeg + sliceDeg / 2;
+      
+      // 目标旋转量计算
+      const currentMod = currentRotation % 360;
+      // 需要让 targetSectorCenter 旋转到指针所在位置 (270度相当于正上方)
+      const targetAngleAtTop = (360 - targetSectorCenter) % 360;
+      let diff = (targetAngleAtTop - currentMod) % 360;
+      if (diff < 0) diff += 360;
+
+      // 基础转动圈数：6 ~ 9 圈
+      const extraRounds = (6 + Math.floor(Math.random() * 3)) * 360;
+      const finalRotation = currentRotation + extraRounds + diff;
+      const durationMs = 5200;
+
+      // 设置转动动效
+      wheelCanvas.style.transition = `transform ${durationMs}ms cubic-bezier(0.12, 0.82, 0.18, 1)`;
+      wheelCanvas.style.transform = `rotate(${finalRotation}deg)`;
+
+      // 模拟转动过程中指针哒哒声
+      let tickInterval = 60;
+      let tickTimer = null;
+      function tickTick() {
+        if (!isSpinning) return;
+        playTickSound();
+        tickInterval *= 1.08;
+        if (tickInterval < 450) {
+          tickTimer = setTimeout(tickTick, tickInterval);
+        }
+      }
+      tickTick();
+
+      // 动画结束回调
+      setTimeout(() => {
+        currentRotation = finalRotation;
+        isSpinning = false;
+        spinCenterBtn.disabled = false;
+        clearTimeout(tickTimer);
+
+        // 记录历史
+        const sn = generateCertSN();
+        const timeStr = formatTime(new Date());
+        saveHistory({
+          prizeIndex: winnerIndex,
+          sn: sn,
+          time: timeStr
+        });
+
+        // 更新状态
+        currentStatusText.textContent = `恭喜抽中：${p.fullName}！🎉`;
+        lastPrizeTag.textContent = `上一轮：${p.title}`;
+
+        // 音效 + 礼花雨
+        playWinSound();
+        fireRomanticConfetti();
+
+        // 延时弹出公证书
+        setTimeout(() => {
+          openCertModal(winnerIndex, sn, timeStr);
+        }, 300);
+      }, durationMs + 100);
+    }
+
+    /* ================= 公证书弹窗控制 ================= */
+    function openCertModal(prizeIndex, sn, timeStr) {
+      const p = PRIZES[prizeIndex];
+      modalPrizeTitle.textContent = p.fullName;
+      modalPrizeDur.textContent = `期限：${p.duration}`;
+      modalPrizeDesc.textContent = p.desc;
+      modalCertSn.textContent = sn;
+      modalCertTime.textContent = timeStr;
+
+      certModal.classList.add("active");
+    }
+
+    function closeCertModal() {
+      certModal.classList.remove("active");
+    }
+
+    // 暴露给全局历史点击调用
+    window.viewCertDetail = function(prizeIndex, sn, timeStr) {
+      openCertModal(prizeIndex, sn, timeStr);
+    };
+
+    /* ================= 纯原生 Canvas 绘制并导出公证书海报图片 ================= */
+    function exportCertImage() {
+      const canvas = document.getElementById("exportCanvas");
+      const eCtx = canvas.getContext("2d");
+      
+      // 高清 2 倍海报尺寸 (800 x 1060)
+      canvas.width = 800;
+      canvas.height = 1060;
+
+      // 1. 背景渐变
+      const bgGrad = eCtx.createLinearGradient(0, 0, 800, 1060);
+      bgGrad.addColorStop(0, "#fffaf4");
+      bgGrad.addColorStop(1, "#ffe8ee");
+      eCtx.fillStyle = bgGrad;
+      eCtx.fillRect(0, 0, 800, 1060);
+
+      // 2. 外部华丽双金粉色花边
+      eCtx.strokeStyle = "#e09f3e";
+      eCtx.lineWidth = 6;
+      eCtx.strokeRect(30, 30, 740, 1000);
+
+      eCtx.strokeStyle = "#ff758c";
+      eCtx.lineWidth = 2;
+      eCtx.strokeRect(40, 40, 720, 980);
+
+      // 四角装饰爱心
+      eCtx.fillStyle = "#ff4d6d";
+      eCtx.font = "24px sans-serif";
+      eCtx.textAlign = "center";
+      eCtx.fillText("❤", 55, 62);
+      eCtx.fillText("❤", 745, 62);
+      eCtx.fillText("❤", 55, 1008);
+      eCtx.fillText("❤", 745, 1008);
+
+      // 3. 顶部 Header
+      eCtx.fillStyle = "#9c6644";
+      eCtx.font = "bold 16px -apple-system, sans-serif";
+      eCtx.letterSpacing = "2px";
+      eCtx.fillText("MINISTRY OF LOVE · OFFICIAL CERTIFICATE", 400, 105);
+
+      eCtx.fillStyle = "#7f1d1d";
+      eCtx.font = "bold 44px 'Noto Serif SC', serif";
+      eCtx.fillText("恋爱陪伴权益公证书", 400, 165);
+
+      eCtx.fillStyle = "#b08968";
+      eCtx.font = "16px sans-serif";
+      eCtx.fillText("—— 中华人民共和国恋爱民政总署 · 特别签发 ——", 400, 205);
+
+      // 分割线
+      eCtx.setLineDash([8, 8]);
+      eCtx.strokeStyle = "rgba(224, 159, 62, 0.5)";
+      eCtx.beginPath();
+      eCtx.moveTo(70, 235);
+      eCtx.lineTo(730, 235);
+      eCtx.stroke();
+      eCtx.setLineDash([]);
+
+      // 4. 中奖正文
+      eCtx.fillStyle = "#7f1d1d";
+      eCtx.font = "20px -apple-system, sans-serif";
+      eCtx.fillText("🎉 恭喜世界上最可爱的小仙女！经公证确认抽中：", 400, 285);
+
+      // 奖品名称（大标题）
+      eCtx.fillStyle = "#ff1461";
+      eCtx.font = "bold 42px 'Noto Serif SC', serif";
+      const prizeTitle = modalPrizeTitle.textContent;
+      eCtx.fillText(prizeTitle, 400, 360);
+
+      // 期限标签
+      eCtx.fillStyle = "#ff4d6d";
+      eCtx.beginPath();
+      eCtx.roundRect(260, 400, 280, 40, 20);
+      eCtx.fill();
+      eCtx.fillStyle = "#ffffff";
+      eCtx.font = "bold 18px sans-serif";
+      eCtx.fillText(modalPrizeDur.textContent, 400, 426);
+
+      // 权益描述框
+      eCtx.fillStyle = "rgba(255, 255, 255, 0.85)";
+      eCtx.beginPath();
+      eCtx.roundRect(80, 475, 640, 140, 16);
+      eCtx.fill();
+      eCtx.strokeStyle = "rgba(224, 159, 62, 0.4)";
+      eCtx.lineWidth = 1.5;
+      eCtx.stroke();
+
+      eCtx.fillStyle = "#582f0e";
+      eCtx.font = "20px -apple-system, sans-serif";
+      eCtx.textAlign = "left";
+      
+      // 换行绘制权益说明
+      const descText = modalPrizeDesc.textContent.trim();
+      wrapText(eCtx, `【公证权益】${descText}`, 110, 520, 580, 32);
+
+      // 5. 凭证编码信息卡
+      eCtx.fillStyle = "rgba(255, 255, 255, 0.75)";
+      eCtx.beginPath();
+      eCtx.roundRect(80, 650, 640, 190, 16);
+      eCtx.fill();
+      eCtx.stroke();
+
+      eCtx.font = "17px sans-serif";
+      eCtx.fillStyle = "#9c6644";
+      eCtx.fillText("公证单号：", 110, 695);
+      eCtx.fillStyle = "#7f1d1d";
+      eCtx.fillText(modalCertSn.textContent, 200, 695);
+
+      eCtx.fillStyle = "#9c6644";
+      eCtx.fillText("签发时间：", 110, 740);
+      eCtx.fillStyle = "#7f1d1d";
+      eCtx.fillText(modalCertTime.textContent, 200, 740);
+
+      eCtx.fillStyle = "#9c6644";
+      eCtx.fillText("承 办 人：", 110, 785);
+      eCtx.fillStyle = "#7f1d1d";
+      eCtx.fillText("全世界最爱你的男朋友（官方认证）", 200, 785);
+
+      // 6. 印章绘制（逼真红色公章）
+      eCtx.save();
+      eCtx.translate(620, 745);
+      eCtx.rotate(-15 * Math.PI / 180);
+      
+      eCtx.strokeStyle = "#dc2626";
+      eCtx.lineWidth = 4;
+      eCtx.beginPath();
+      eCtx.arc(0, 0, 70, 0, Math.PI * 2);
+      eCtx.stroke();
+
+      eCtx.strokeStyle = "rgba(220, 38, 38, 0.4)";
+      eCtx.lineWidth = 1.5;
+      eCtx.beginPath();
+      eCtx.arc(0, 0, 63, 0, Math.PI * 2);
+      eCtx.stroke();
+
+      eCtx.fillStyle = "#dc2626";
+      eCtx.textAlign = "center";
+      eCtx.font = "bold 16px sans-serif";
+      eCtx.fillText("恋爱特别公证处", 0, -25);
+      eCtx.font = "26px sans-serif";
+      eCtx.fillText("★", 0, 6);
+      eCtx.font = "bold 18px sans-serif";
+      eCtx.fillText("永久生效", 0, 36);
+      eCtx.restore();
+
+      // 7. 底部附则
+      eCtx.textAlign = "center";
+      eCtx.fillStyle = "#a4133c";
+      eCtx.font = "15px sans-serif";
+      eCtx.fillText("* 本公证书受《最高恋爱幸福公约》保护，支持截图发微信、发朋友圈公示秀恩爱 *", 400, 895);
+      eCtx.fillText("执行监督人：终生不离不弃局 · 愿每次陪伴都是深情告白", 400, 930);
+
+      // 导出下载
+      try {
+        const link = document.createElement("a");
+        link.download = `恋爱公证书-${modalCertSn.textContent}.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+        showToast("📸 公证书已保存为高清图片！快发给她看吧~ ❤️");
+      } catch (err) {
+        showToast("长按屏幕或截图即可保存公证书哟！");
+      }
+    }
+
+    // 辅助换行绘制文字
+    function wrapText(context, text, x, y, maxWidth, lineHeight) {
+      let line = '';
+      for (let n = 0; n < text.length; n++) {
+        let testLine = line + text[n];
+        let metrics = context.measureText(testLine);
+        let testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+          context.fillText(line, x, y);
+          line = text[n];
+          y += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      context.fillText(line, x, y);
+    }
+
+    /* ================= 交互提示 Toast ================= */
+    let toastTimer = null;
+    function showToast(msg) {
+      toastBox.textContent = msg;
+      toastBox.classList.add("show");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toastBox.classList.remove("show");
+      }, 2200);
+    }
+
+    /* ================= 屏幕任意点击飘爱心与情话特效 ================= */
+    const LOVE_WORDS = [
+      "心动啦 ❤️", "最喜欢你 ✨", "你是我的唯一 💖", "想一直陪着你 🌸",
+      "三生有幸 💍", "做我永远的小朋友 🎀", "甜度爆表 🍬", "一眼万年 🌟"
+    ];
+    document.addEventListener("click", function(e) {
+      // 排除弹窗与按钮上的普通点击阻断
+      if (e.target.closest("#spinCenterBtn") || e.target.closest(".cert-actions")) return;
+
+      const heart = document.createElement("div");
+      heart.className = "click-heart";
+      heart.style.left = e.clientX + "px";
+      heart.style.top = e.clientY + "px";
+      
+      const word = LOVE_WORDS[Math.floor(Math.random() * LOVE_WORDS.length)];
+      const colors = ["#ff0054", "#ff477e", "#ff5400", "#7209b7", "#f72585"];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      
+      heart.style.color = color;
+      heart.textContent = Math.random() > 0.4 ? word : "💖";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 1200);
+    });
+
+    /* ================= 男朋友专属暗号与彩蛋 ================= */
+    // 1. 连按三次左上角 Logo，必中【一辈子】
+    let logoClickCount = 0;
+    let logoClickTimer = null;
+    loveLogo.addEventListener("click", () => {
+      logoClickCount++;
+      clearTimeout(logoClickTimer);
+      logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 1000);
+      
+      if (logoClickCount === 3) {
+        cheatNextWinner = 1; // 1 = 【一辈子】
+        logoClickCount = 0;
+        showToast("💖 命运齿轮已调谐：下一次必中【一辈子】！");
+      }
+    });
+
+    // 2. 键盘暗号：按住 L 抽奖必中【一辈子】，按住 E 抽奖必中【三生三世】
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "l" || e.key === "L") {
+        cheatNextWinner = 1; // 一辈子
+        showToast("💍 恋爱契约锁定：必中【一辈子】");
+      }
+      if (e.key === "e" || e.key === "E") {
+        cheatNextWinner = 0; // 三生三世
+        showToast("👑 旷世情缘锁定：必中【三生三世】");
+      }
+      if (e.code === "Space" && !isSpinning && !certModal.classList.contains("active")) {
+        e.preventDefault();
+        spinWheel();
+      }
+      if (e.key === "Escape" && certModal.classList.contains("active")) {
+        closeCertModal();
+      }
+    });
+
+    /* ================= 事件绑定 ================= */
+    spinCenterBtn.addEventListener("click", spinWheel);
+    wheelPointer.addEventListener("click", spinWheel);
+    closeCertBtn.addEventListener("click", closeCertModal);
+    certModal.addEventListener("click", (e) => {
+      if (e.target === certModal) closeCertModal();
+    });
+
+    spinAgainModalBtn.addEventListener("click", () => {
+      closeCertModal();
+      setTimeout(spinWheel, 300);
+    });
+
+    saveCertBtn.addEventListener("click", exportCertImage);
+
+    // 音效开关
+    soundToggleBtn.addEventListener("click", () => {
+      soundEnabled = !soundEnabled;
+      soundIcon.textContent = soundEnabled ? "🔊" : "🔇";
+      soundText.textContent = soundEnabled ? "浪漫音效" : "静音中";
+      showToast(soundEnabled ? "音效已开启，聆听心跳吧 💓" : "音效已静音 🌙");
+    });
+
+    // 滚动到历史面板
+    viewHistoryTopBtn.addEventListener("click", () => {
+      document.getElementById("historyPanel").scrollIntoView({ behavior: "smooth" });
+    });
+
+    // 清空历史
+    clearHistoryBtn.addEventListener("click", () => {
+      if (getHistory().length === 0) {
+        showToast("还没有开奖历史记录哦~");
+        return;
+      }
+      if (confirm("确定要清空全部开奖记录吗？")) {
+        localStorage.removeItem(STORAGE_KEY);
+        renderHistory();
+        lastPrizeTag.textContent = "";
+        currentStatusText.textContent = "记录已清空，开启全新的心动旅程吧！";
+        showToast("开奖记录已清空 🍃");
+      }
+    });
+
+    /* ================= 页面初始化 ================= */
+    drawWheel();
+    renderPrizeGrid();
+    renderHistory();
+  </script>
+</body>
+</html>
