@@ -2222,13 +2222,18 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
+      html {
         scroll-behavior: auto !important;
-        transition-duration: 0.001ms !important;
+      }
+
+      /* 只停掉持续循环的装饰动画。
+         抽奖转盘、点击情话、Toast 等属于功能反馈，不能被系统“减少动画”
+         压成 0.001ms，否则桌面端会表现成“没转 / 没有点击特效”。 */
+      .brand-icon,
+      .badge-dot,
+      .wheel-outer-ring,
+      .wheel-center-btn .heart-icon {
+        animation: none !important;
       }
     }
   </style>
